@@ -1,0 +1,5 @@
+package PathFinder
+
+func Solve() {
+
+}
