@@ -2,29 +2,41 @@ package PathFinder
 
 // package main
 
-import "fmt"
+// Creates The Board
+// func Board(slice []string) [][]string {
+// 	empty := [][]string{}
+// 	str := []string{}
+// 	for i := 0; i < len(slice); i++ {
+// 		for _, v := range slice[i] {
+// 			str = append(str, string(v))
+// 		}
+// 		empty = append(empty, str)
+// 		str = []string{}
+// 	}
+// 	return empty
+// }
 
-func Board(slice []string) [][]string {
-	empty := [][]string{}
-	str := []string{}
-	for i := 0; i < len(slice); i++ {
-		for _, v := range slice[i] {
-			str = append(str, string(v))
-		}
-		empty = append(empty, str)
-		str = []string{}
+// // PrintBoard
+// func PrintBoard(board [][]string) {
+// 	for i := 0; i < len(board); i++ {
+// 		for j := 0; j < len(board[i]); j++ {
+// 			fmt.Print(board[i][j] + "  ")
+// 		}
+// 		fmt.Print("\n\n")
+// 	}
+// }
+
+func CopyBoard(board [][]string) [][]string {
+	copyBoard := make([][]string, len(board))
+
+	for i := range board {
+		copyBoard[i] = make([]string, len(board[i]))
+		copy(copyBoard[i], board[i])
 	}
-	return empty
+
+	return copyBoard
 }
 
-func PrintBoard(board [][]string) {
-	for i := 0; i < len(board); i++ {
-		for j := 0; j < len(board[i]); j++ {
-			fmt.Print(board[i][j] + "  ")
-		}
-		fmt.Print("\n\n")
-	}
-}
 func FindS(board [][]string) (int, int) {
 	for i := 0; i < len(board); i++ {
 		for j := 0; j < len(board[i]); j++ {
@@ -96,70 +108,6 @@ func CheckUp(board [][]string, rowS, colS int) (bool, bool, bool) {
 	return false, false, true
 }
 
-func Solve(board [][]string, rowS int, colS int, priorities []func([][]string, int, int) (bool, bool, bool), priorString []string) ([][]string, bool) {
-	// check right
-	Evalue, ValidPos, _ := priorities[0](board, rowS, colS)
-	if Evalue {
-		return board, true
-	}
-	if ValidPos {
-		r, c := RowAndColAddValue(priorString[0])
-		board[rowS+r][colS+c] = "S"
-		_, solved := Solve(board, rowS+r, colS+c, priorities, priorString)
-		if solved {
-			return board, true
-		}
-		board[rowS+r][colS+c] = "."
-	}
-	// check down
-	Evalue, ValidPos, _ = priorities[1](board, rowS, colS)
-	if Evalue {
-		return board, true
-	}
-	if ValidPos {
-		r, c := RowAndColAddValue(priorString[1])
-		board[rowS+r][colS+c] = "S"
-		_, solved := Solve(board, rowS+r, colS+c, priorities, priorString)
-		if solved {
-			return board, true
-		}
-		board[rowS+r][colS+c] = "."
-	}
-
-	// check left
-	Evalue, ValidPos, _ = priorities[2](board, rowS, colS)
-	if Evalue {
-		return board, true
-	}
-	if ValidPos {
-		r, c := RowAndColAddValue(priorString[2])
-		board[rowS+r][colS+c] = "S"
-		_, solved := Solve(board, rowS+r, colS+c, priorities, priorString)
-		if solved {
-			return board, true
-		}
-		board[rowS+r][colS+c] = "."
-	}
-
-	// check up
-	Evalue, ValidPos, _ = priorities[3](board, rowS, colS)
-	if Evalue {
-		return board, true
-	}
-	if ValidPos {
-		r, c := RowAndColAddValue(priorString[3])
-		board[rowS+r][colS+c] = "S"
-		_, solved := Solve(board, rowS+r, colS+c, priorities, priorString)
-		if solved {
-			return board, true
-		}
-		board[rowS+r][colS+c] = "."
-	}
-
-	return board, false
-
-}
-
 func variations() [][]int {
 	final := [][]int{}
 	slice := []int{}
@@ -229,15 +177,68 @@ func RowAndColAddValue(str string) (int, int) {
 	}
 }
 
-func CopyBoard(board [][]string) [][]string {
-	copyBoard := make([][]string, len(board))
-
-	for i := range board {
-		copyBoard[i] = make([]string, len(board[i]))
-		copy(copyBoard[i], board[i])
+func Solve(board [][]string, rowS int, colS int, priorities []func([][]string, int, int) (bool, bool, bool), priorString []string) ([][]string, bool) {
+	// check right
+	Evalue, ValidPos, _ := priorities[0](board, rowS, colS)
+	if Evalue {
+		return board, true
+	}
+	if ValidPos {
+		r, c := RowAndColAddValue(priorString[0])
+		board[rowS+r][colS+c] = "S"
+		_, solved := Solve(board, rowS+r, colS+c, priorities, priorString)
+		if solved {
+			return board, true
+		}
+		board[rowS+r][colS+c] = "."
+	}
+	// check down
+	Evalue, ValidPos, _ = priorities[1](board, rowS, colS)
+	if Evalue {
+		return board, true
+	}
+	if ValidPos {
+		r, c := RowAndColAddValue(priorString[1])
+		board[rowS+r][colS+c] = "S"
+		_, solved := Solve(board, rowS+r, colS+c, priorities, priorString)
+		if solved {
+			return board, true
+		}
+		board[rowS+r][colS+c] = "."
 	}
 
-	return copyBoard
+	// check left
+	Evalue, ValidPos, _ = priorities[2](board, rowS, colS)
+	if Evalue {
+		return board, true
+	}
+	if ValidPos {
+		r, c := RowAndColAddValue(priorString[2])
+		board[rowS+r][colS+c] = "S"
+		_, solved := Solve(board, rowS+r, colS+c, priorities, priorString)
+		if solved {
+			return board, true
+		}
+		board[rowS+r][colS+c] = "."
+	}
+
+	// check up
+	Evalue, ValidPos, _ = priorities[3](board, rowS, colS)
+	if Evalue {
+		return board, true
+	}
+	if ValidPos {
+		r, c := RowAndColAddValue(priorString[3])
+		board[rowS+r][colS+c] = "S"
+		_, solved := Solve(board, rowS+r, colS+c, priorities, priorString)
+		if solved {
+			return board, true
+		}
+		board[rowS+r][colS+c] = "."
+	}
+
+	return board, false
+
 }
 
 func sameBoard(a, b [][]string) bool {
@@ -268,6 +269,7 @@ func IsContained(AllPaths [][][]string, SinglePath [][]string) bool {
 	}
 	return false
 }
+
 func AllValidPaths(board [][]string) [][][]string {
 	rowS, colS := FindS(board)
 	answer := [][][]string{}
@@ -321,34 +323,38 @@ func SortValidPath(AllPaths [][][]string, numOfmovements []int) {
 
 }
 
+func SolvePathFinder(board [][]string) [][][]string {
+	all_paths := AllValidPaths(board)
+	SortValidPath(all_paths, SliceOfS(all_paths))
+	return all_paths
+
+}
+
 // func main() {
 // 	// slice := []string{
 // 	// 	"..S..X",
 // 	// 	"X...X.",
 // 	// 	"E..X..",
 // 	// }
-// 	slice := []string{
-// 		"......",
-// 		"SXEXX.",
-// 		".X....",
-// 	}
 // 	// slice := []string{
-// 	// 	"S......................................................",
-// 	// 	".......................................................",
-// 	// 	".......................................................",
-// 	// 	".......................................................",
-// 	// 	"......................................................E",
+// 	// 	"......",
+// 	// 	"SXEXX.",
+// 	// 	".X....",
 // 	// }
+// 	slice := []string{
+// 		"S..............................................",
+// 		"...............................................",
+// 		"...............................................",
+// 		"...............................................",
+// 		"..............................................E",
+// 	}
 // 	board := Board(slice)
 // 	PrintBoard(board)
 // 	fmt.Print("\n\n")
-// 	validPaths := AllValidPaths(board)
-// 	fmt.Println(len(validPaths))
-// 	fmt.Println(SliceOfS(validPaths))
-// 	PrintBoard(validPaths[0])
-// 	fmt.Print("\n\n")
-// 	SortValidPath(validPaths, SliceOfS(validPaths))
-// 	PrintBoard(validPaths[0])
-// 	fmt.Println(SliceOfS(validPaths))
+// 	validPaths := SolvePathFinder(board)
+// 	for i := 0; i < len(validPaths); i++ {
+// 		PrintBoard(validPaths[i])
+// 		fmt.Print("\n\n")
+// 	}
 
 // }
