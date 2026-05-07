@@ -58,9 +58,7 @@ func UserInput(str []string) []string {
 		return []string{}
 	}
 
-
 	return stringArray
-
 }
 
 // func main () {
