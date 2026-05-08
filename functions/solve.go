@@ -3,28 +3,28 @@ package PathFinder
 // package main
 
 // Creates The Board
-// func Board(slice []string) [][]string {
-// 	empty := [][]string{}
-// 	str := []string{}
-// 	for i := 0; i < len(slice); i++ {
-// 		for _, v := range slice[i] {
-// 			str = append(str, string(v))
-// 		}
-// 		empty = append(empty, str)
-// 		str = []string{}
-// 	}
-// 	return empty
-// }
+func Board(slice []string) [][]string {
+	empty := [][]string{}
+	str := []string{}
+	for i := 0; i < len(slice); i++ {
+		for _, v := range slice[i] {
+			str = append(str, string(v))
+		}
+		empty = append(empty, str)
+		str = []string{}
+	}
+	return empty
+}
 
-// // PrintBoard
-// func PrintBoard(board [][]string) {
-// 	for i := 0; i < len(board); i++ {
-// 		for j := 0; j < len(board[i]); j++ {
-// 			fmt.Print(board[i][j] + "  ")
-// 		}
-// 		fmt.Print("\n\n")
-// 	}
-// }
+// PrintBoard
+func PrintBoard(board [][]string) {
+	for i := 0; i < len(board); i++ {
+		for j := 0; j < len(board[i]); j++ {
+			fmt.Print(board[i][j] + "  ")
+		}
+		fmt.Print("\n\n")
+	}
+}
 
 func CopyBoard(board [][]string) [][]string {
 	copyBoard := make([][]string, len(board))
@@ -329,32 +329,3 @@ func SolvePathFinder(board [][]string) [][][]string {
 	return all_paths
 
 }
-
-// func main() {
-// 	// slice := []string{
-// 	// 	"..S..X",
-// 	// 	"X...X.",
-// 	// 	"E..X..",
-// 	// }
-// 	// slice := []string{
-// 	// 	"......",
-// 	// 	"SXEXX.",
-// 	// 	".X....",
-// 	// }
-// 	slice := []string{
-// 		"S..............................................",
-// 		"...............................................",
-// 		"...............................................",
-// 		"...............................................",
-// 		"..............................................E",
-// 	}
-// 	board := Board(slice)
-// 	PrintBoard(board)
-// 	fmt.Print("\n\n")
-// 	validPaths := SolvePathFinder(board)
-// 	for i := 0; i < len(validPaths); i++ {
-// 		PrintBoard(validPaths[i])
-// 		fmt.Print("\n\n")
-// 	}
-
-// }
