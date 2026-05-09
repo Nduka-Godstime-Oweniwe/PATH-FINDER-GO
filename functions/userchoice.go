@@ -30,7 +30,7 @@ func Choice() string {
 
 }
 
-func UserReplay(board [][]string) bool {
+func UserChoice(board [][]string) bool {
 	paths := Choice()
 	validPaths := SolvePathFinder(board)
 	if paths == "1" {
