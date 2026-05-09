@@ -2,30 +2,6 @@ package PathFinder
 
 // package main
 
-// Creates The Board
-// func Board(slice []string) [][]string {
-// 	empty := [][]string{}
-// 	str := []string{}
-// 	for i := 0; i < len(slice); i++ {
-// 		for _, v := range slice[i] {
-// 			str = append(str, string(v))
-// 		}
-// 		empty = append(empty, str)
-// 		str = []string{}
-// 	}
-// 	return empty
-// }
-
-// PrintBoard
-// func PrintBoard(board [][]string) {
-// 	for i := 0; i < len(board); i++ {
-// 		for j := 0; j < len(board[i]); j++ {
-// 			fmt.Print(board[i][j] + "  ")
-// 		}
-// 		fmt.Print("\n\n")
-// 	}
-// }
-
 func CopyBoard(board [][]string) [][]string {
 	copyBoard := make([][]string, len(board))
 
@@ -135,34 +111,42 @@ func variations() [][]int {
 	return final
 }
 
-func functions() ([][]func([][]string, int, int) (bool, bool, bool), [][]string) {
+func functions() ([][]func([][]string, int, int) (bool, bool, bool), [][]string, [][]string) {
 	finalStr := [][]string{}
 	str := []string{}
 	permutations := variations()
 	final := [][]func([][]string, int, int) (bool, bool, bool){}
 	function := []func([][]string, int, int) (bool, bool, bool){}
+	arrow := []string{}
+	finalarrow := [][]string{}
 	for i := 0; i < len(permutations); i++ {
 		for j := 0; j < 4; j++ {
 			if permutations[i][j] == 1 {
 				function = append(function, CheckRight)
 				str = append(str, "CheckRight")
+				arrow = append(arrow, "➡️")
 			} else if permutations[i][j] == 2 {
 				function = append(function, CheckLeft)
 				str = append(str, "CheckLeft")
+				arrow = append(arrow, "⬅️")
 			} else if permutations[i][j] == 3 {
 				function = append(function, CheckUp)
 				str = append(str, "CheckUp")
+				arrow = append(arrow, "⬆️")
 			} else if permutations[i][j] == 4 {
 				function = append(function, CheckDown)
 				str = append(str, "CheckDown")
+				arrow = append(arrow, "⬇️")
 			}
 		}
 		final = append(final, function)
 		finalStr = append(finalStr, str)
+		finalarrow = append(finalarrow, arrow)
 		function = []func([][]string, int, int) (bool, bool, bool){}
 		str = []string{}
+		arrow = []string{}
 	}
-	return final, finalStr
+	return final, finalStr, finalarrow
 }
 
 func RowAndColAddValue(str string) (int, int) {
@@ -177,7 +161,7 @@ func RowAndColAddValue(str string) (int, int) {
 	}
 }
 
-func Solve(board [][]string, rowS int, colS int, priorities []func([][]string, int, int) (bool, bool, bool), priorString []string) ([][]string, bool) {
+func Solve(board [][]string, rowS int, colS int, priorities []func([][]string, int, int) (bool, bool, bool), priorString []string, arrow []string) ([][]string, bool) {
 	// check right
 	Evalue, ValidPos, _ := priorities[0](board, rowS, colS)
 	if Evalue {
@@ -185,8 +169,8 @@ func Solve(board [][]string, rowS int, colS int, priorities []func([][]string, i
 	}
 	if ValidPos {
 		r, c := RowAndColAddValue(priorString[0])
-		board[rowS+r][colS+c] = "S"
-		_, solved := Solve(board, rowS+r, colS+c, priorities, priorString)
+		board[rowS+r][colS+c] = arrow[0]
+		_, solved := Solve(board, rowS+r, colS+c, priorities, priorString, arrow)
 		if solved {
 			return board, true
 		}
@@ -199,8 +183,8 @@ func Solve(board [][]string, rowS int, colS int, priorities []func([][]string, i
 	}
 	if ValidPos {
 		r, c := RowAndColAddValue(priorString[1])
-		board[rowS+r][colS+c] = "S"
-		_, solved := Solve(board, rowS+r, colS+c, priorities, priorString)
+		board[rowS+r][colS+c] = arrow[1]
+		_, solved := Solve(board, rowS+r, colS+c, priorities, priorString, arrow)
 		if solved {
 			return board, true
 		}
@@ -214,8 +198,8 @@ func Solve(board [][]string, rowS int, colS int, priorities []func([][]string, i
 	}
 	if ValidPos {
 		r, c := RowAndColAddValue(priorString[2])
-		board[rowS+r][colS+c] = "S"
-		_, solved := Solve(board, rowS+r, colS+c, priorities, priorString)
+		board[rowS+r][colS+c] = arrow[2]
+		_, solved := Solve(board, rowS+r, colS+c, priorities, priorString, arrow)
 		if solved {
 			return board, true
 		}
@@ -229,8 +213,8 @@ func Solve(board [][]string, rowS int, colS int, priorities []func([][]string, i
 	}
 	if ValidPos {
 		r, c := RowAndColAddValue(priorString[3])
-		board[rowS+r][colS+c] = "S"
-		_, solved := Solve(board, rowS+r, colS+c, priorities, priorString)
+		board[rowS+r][colS+c] = arrow[3]
+		_, solved := Solve(board, rowS+r, colS+c, priorities, priorString, arrow)
 		if solved {
 			return board, true
 		}
@@ -273,11 +257,11 @@ func IsContained(AllPaths [][][]string, SinglePath [][]string) bool {
 func AllValidPaths(board [][]string) [][][]string {
 	rowS, colS := FindS(board)
 	answer := [][][]string{}
-	priorities, priorsString := functions()
+	priorities, priorsString, arrows := functions()
 
 	for i := 0; i < 24; i++ {
 		copy := CopyBoard(board)
-		ans, solved := Solve(copy, rowS, colS, priorities[i], priorsString[i])
+		ans, solved := Solve(copy, rowS, colS, priorities[i], priorsString[i], arrows[i])
 		if solved {
 			if !IsContained(answer, ans) {
 				answer = append(answer, ans)
@@ -294,7 +278,7 @@ func CountS(board [][]string) int {
 	count := 0
 	for i := 0; i < len(board); i++ {
 		for j := 0; j < len(board[i]); j++ {
-			if board[i][j] == "S" {
+			if board[i][j] != "S" && board[i][j] != "." && board[i][j] != "X" && board[i][j] != "E" {
 				count++
 			}
 		}
