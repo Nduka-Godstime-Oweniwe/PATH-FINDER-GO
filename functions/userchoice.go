@@ -1,6 +1,8 @@
 package PathFinder
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func Input(prompt string) string {
 	var answer string
@@ -25,4 +27,41 @@ func Choice() string {
 	}
 	return option
 
+}
+
+func UserReplay(board [][]string) {
+	paths := Choice()
+	validPaths := SolvePathFinder(board)
+	if paths == "1" {
+		count := CountS(validPaths[0])
+		paths := 1
+		for i := 0; i < len(validPaths); i++ {
+			if count == CountS(validPaths[i]) {
+				fmt.Printf("Path %d:\n", paths)
+				paths++
+				PrintBoard(validPaths[i])
+				fmt.Print("\n\n")
+			}
+		}
+
+	} else if paths == "2" {
+		count := CountS(validPaths[len(validPaths)-1])
+		paths := 1
+		for i := 0; i < len(validPaths); i++ {
+			if count == CountS(validPaths[i]) {
+				fmt.Printf("Path %d:\n", paths)
+				paths++
+				PrintBoard(validPaths[i])
+				fmt.Print("\n\n")
+			}
+		}
+	} else {
+		paths := 1
+		for i := 0; i < len(validPaths); i++ {
+			fmt.Printf("Path %d:\n", paths)
+			paths++
+			PrintBoard(validPaths[i])
+			fmt.Print("\n\n")
+		}
+	}
 }
