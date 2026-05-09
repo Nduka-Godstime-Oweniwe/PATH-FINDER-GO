@@ -1,7 +1,7 @@
 package PathFinder
 
 // Creates The Board
-func Board(slice []string) [][]string {
+func CreateBoard(slice []string) [][]string {
 	empty := [][]string{}
 	str := []string{}
 	for i := 0; i < len(slice); i++ {
