@@ -37,7 +37,7 @@ func GetUserName() string {
 			fmt.Println("Error: Username is too long. Hint: max. length is 15")
 			continue
 		}
-		fmt.Printf("Hello, %s, The ToloTolo\n", username)
+		fmt.Printf("Hello, %s, The ToloTolo!\n", username)
 		break
 	}
 	return username
@@ -55,6 +55,7 @@ func GetUserChoice() string {
 		fmt.Print("Choose option: ")
 		option, _ = reader.ReadString('\n')
 		option = strings.TrimSpace(option)
+		option = strings.ToUpper(option)
 		if option != "1" && option != "2" && option != "3" {
 			fmt.Println("Invalid Option!")
 			continue
@@ -110,6 +111,7 @@ func EachRow(num int) (string, bool, bool) {
 
 		rows, _ = reader.ReadString('\n')
 		rows = strings.TrimSpace(rows)
+		rows = strings.ToUpper(rows)
 
 		if rows == "" {
 			fmt.Println("String Cannot Be Empty")
@@ -178,8 +180,9 @@ func Everything() []string {
 		fmt.Print("Enter All Rows(Each separated by a space): ")
 		answer, _ = reader.ReadString('\n')
 		answer = strings.TrimSpace(answer)
+		answer = strings.ToUpper(answer)
 		if answer == "" {
-			fmt.Println("Cannot accept and empty Input")
+			fmt.Println("Cannot accept an empty Input")
 			continue
 		}
 		slice = strings.Fields(answer)
@@ -189,19 +192,19 @@ func Everything() []string {
 
 		for i := 0; i < len(slice); i++ {
 			if S >= 1 && CheckS(slice[i]) {
-				fmt.Println("Pls Ensure you have only 1 S in the entire board")
+				fmt.Println("Pls, ensure you have only 1 S in the entire board")
 				check = false
 				break
 			}
 
 			if E >= 1 && CheckE(slice[i]) {
-				fmt.Println("Pls Ensure you have only 1 E in the entire board")
+				fmt.Println("Pls, ensure you have only 1 E in the entire board")
 				check = false
 				break
 			}
 
 			if !CheckCharacters(slice[i]) {
-				fmt.Println("Only 1 \"S\", 1 \"E\" and as many \"X\" and \".\" are allowed per row ")
+				fmt.Println("Only 1 \"S\", 1 \"E\" and as many \"X\" and \".\" are allowed per row")
 				check = false
 				break
 
@@ -231,9 +234,9 @@ func Everything() []string {
 func UserInput() []string {
 	userchoice := GetUserChoice()
 	if userchoice == "1" {
-		return RowByRow()
-	} else if userchoice == "2" {
 		return Everything()
+	} else if userchoice == "2" {
+		return RowByRow()
 	} else {
 		return []string{}
 	}
