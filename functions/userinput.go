@@ -12,32 +12,35 @@ func main() {
 	fmt.Println(UserInput())
 }
 
+// 😉🤔🫣🙄💯👇👋👆🫡😎🤦💰💵
+// 😂🤣😄
+
 func GetUserName() string {
-	fmt.Println("================ Welcome To The Pathfinder ================")
+	fmt.Println("Welcome to the Pathfinder")
 	var username string
 
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
 		// Collect & validate username
-		fmt.Print("Please input your username to begin your quest to riches\nUsername: ")
+		fmt.Print("Please input your username to begin your quest to riches💰💵\nUsername: ")
 
 		name, _ := reader.ReadString('\n')
 		username = strings.TrimSpace(name)
 
 		if username == "" {
-			fmt.Println("Error: Username cannot be empty")
+			fmt.Println("As how na?🤦 You can't be nameless now")
 			continue
 		}
 		if strings.Contains(username, " ") {
-			fmt.Println("Error: Username cannot contain spaces. Hint: Use '_' instead")
+			fmt.Println("My G,😎 abeg don't use space. Hint: Use '_' instead")
 			continue
 		}
 		if len(username) > 15 {
-			fmt.Println("Error: Username is too long. Hint: max. length is 15")
+			fmt.Println("Nawa for you o,😉 Your name is longer than Methuselah age 🤣. Hint: max. length is 15")
 			continue
 		}
-		fmt.Printf("Hello! %s The Beast!\n", username)
+		fmt.Printf("Hello!👋 %s The Beast!🫡💯\n", username)
 		break
 	}
 	return username
@@ -46,10 +49,11 @@ func GetUserName() string {
 func GetUserChoice() string {
 	reader := bufio.NewReader(os.Stdin)
 	username := GetUserName()
+	fmt.Printf("To start your journey %s, select from the options below 👇.\n", username)
 	fmt.Println("1: Input entire board rows at once")
 	fmt.Println("2: Input board row sequentially")
 	fmt.Println("3: Exit")
-	fmt.Printf("To start your journey %s, select from the options above 👆.\n", username)
+	
 	option := ""
 	for {
 		fmt.Print("Choose option: ")
@@ -57,7 +61,7 @@ func GetUserChoice() string {
 		option = strings.TrimSpace(option)
 		option = strings.ToUpper(option)
 		if option != "1" && option != "2" && option != "3" {
-			fmt.Println("Invalid Option!")
+			fmt.Println("Invalid Option!🙄")
 			continue
 		}
 		break
@@ -114,14 +118,14 @@ func EachRow(num int) (string, bool, bool) {
 		rows = strings.ToUpper(rows)
 
 		if rows == "" {
-			fmt.Println("String Cannot Be Empty")
+			fmt.Println("Haba now! Row Cannot Be Empty")
 			continue
 
 		} else if strings.ToUpper(rows) == "DONE" {
 			break
 
 		} else if !CheckCharacters(rows) {
-			fmt.Println("Only 1 \"S\", 1 \"E\" and as many \"X\" and \".\" are allowed ")
+			fmt.Println("Oversabi wan finish you!😂 Only 1 \"S\", 1 \"E\" and as many \"X\" and \".\" are allowed ")
 			continue
 		}
 
@@ -147,12 +151,12 @@ func RowByRow() []string {
 			break
 
 		} else if (S >= 1 && Sbool) || (E >= 1 && Ebool) {
-			fmt.Println("You can only have 1 E and 1 S in the entire path")
+			fmt.Println("Oliver Twist!😎 You can only have 1 E and 1 S in the entire path")
 			continue
 
 		} else if len(slice) != 0 {
 			if len(slice[0]) != len(row) {
-				fmt.Println("Oooops! Invalid number of characters. Each row must have equal length")
+				fmt.Println("Oooops!🫣 Invalid number of characters. Each row must have equal length")
 				continue
 			}
 		}
@@ -182,7 +186,7 @@ func Everything() []string {
 		answer = strings.TrimSpace(answer)
 		answer = strings.ToUpper(answer)
 		if answer == "" {
-			fmt.Println("Cannot accept an empty Input")
+			fmt.Println("As how na? you cannot input an empty Input")
 			continue
 		}
 		slice = strings.Fields(answer)
