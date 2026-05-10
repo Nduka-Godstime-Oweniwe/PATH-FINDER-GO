@@ -30,9 +30,12 @@ func Choice() string {
 
 }
 
-func UserChoice(board [][]string) bool {
+func UserChoice(board [][]string) (bool, bool) {
 	paths := Choice()
 	validPaths := SolvePathFinder(board)
+	if len(validPaths) == 0 {
+		return true, false
+	}
 	if paths == "1" {
 		count := CountS(validPaths[0])
 		path := 1
@@ -65,9 +68,9 @@ func UserChoice(board [][]string) bool {
 			fmt.Print("\n\n")
 		}
 	} else {
-		return false
+		return false, true
 	}
 
 	Input("Type Anything to continue: ")
-	return true
+	return true, true
 }
