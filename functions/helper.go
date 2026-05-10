@@ -8,12 +8,15 @@ import (
 )
 
 func GetUserName() string {
+
+	fmt.Println("================ 🔎 The Pathfinder 🔍 ================")
 	fmt.Println("Welcome to the Pathfinder🔎")
 	var username string
 
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
+
 		// Collect & validate username
 		fmt.Print("Please input your username to begin your quest to riches💰💵\nUsername: ")
 

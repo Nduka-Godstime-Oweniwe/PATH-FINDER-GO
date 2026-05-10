@@ -11,9 +11,8 @@ import (
 // 😂🤣😄
 // 🔍🔎▶⏯
 
-func GetUserChoice() string {
+func GetUserChoice(username string) string {
 	reader := bufio.NewReader(os.Stdin)
-	username := GetUserName()
 	fmt.Printf("To start your journey %s, select from the options below 👇.\n", username)
 	fmt.Println("1: Input entire board rows at once")
 	fmt.Println("2: Input board row sequentially")
@@ -200,8 +199,8 @@ func Everything() []string {
 	return slice
 }
 
-func UserInput() ([]string, bool) {
-	userchoice := GetUserChoice()
+func UserInput(username string) ([]string, bool) {
+	userchoice := GetUserChoice(username)
 	if userchoice == "1" {
 		return Everything(), true
 	} else if userchoice == "2" {
