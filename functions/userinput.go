@@ -13,14 +13,14 @@ func main() {
 }
 
 func GetUserName() string {
-	fmt.Println("=== Welcome To The Pathfinder ===")
+	fmt.Println("================ Welcome To The Pathfinder ================")
 	var username string
 
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
 		// Collect & validate username
-		fmt.Print("Please, input your username to begin your quest to riches\nUsername: ")
+		fmt.Print("Please input your username to begin your quest to riches\nUsername: ")
 
 		name, _ := reader.ReadString('\n')
 		username = strings.TrimSpace(name)
@@ -37,7 +37,7 @@ func GetUserName() string {
 			fmt.Println("Error: Username is too long. Hint: max. length is 15")
 			continue
 		}
-		fmt.Printf("Hello, %s, The ToloTolo\n", username)
+		fmt.Printf("Hello! %s The Beast!\n", username)
 		break
 	}
 	return username
