@@ -34,76 +34,76 @@ func main() {
 	UserName := PathFinder.GetUserName()
 
 	for {
-		
-		for {
-
-		clearScreen()
-
-		for {
-
-			fmt.Println("================ 🔎 The Pathfinder 🔍 ================")
-
-			userSlice, exit := PathFinder.UserInput(UserName)
-
-			if !exit {
-				return
-			}
-
-			board = PathFinder.CreateBoard(userSlice)
-
-			if !PathFinder.CheckEntireBoard(board) {
-
-				fmt.Printf("%s, Your board must contain an E and an S now!🙄\n", UserName)
-				time.Sleep(1 * time.Second)
-
-			} else {
-				break
-			}
-		}
 
 		for {
 
 			clearScreen()
 
-			fmt.Println("================ 🔎 The Pathfinder 🔍 ================")
+			for {
 
-			choice, noPath := PathFinder.UserChoice(board)
+				fmt.Println("================ 🔎 The Pathfinder 🔍 ================")
 
-			if !noPath {
+				userSlice, exit := PathFinder.UserInput(UserName)
 
-				fmt.Printf("Ooops!🫣 Sorry %s, there's no light at the end of your tunnel😞😞😞\n", UserName)
-				fmt.Println("Just go for deliverance abeg.😂 I would refer you to MFM!🤣")
+				if !exit {
+					return
+				}
 
-				time.Sleep(5 * time.Second)
+				board = PathFinder.CreateBoard(userSlice)
 
-				break
+				if !PathFinder.CheckEntireBoard(board) {
+
+					fmt.Printf("%s, Your board must contain an E and an S now!🙄\n", UserName)
+					time.Sleep(1 * time.Second)
+
+				} else {
+					break
+				}
 			}
 
-			if choice {
-				continue
-			} else {
-				break
+			for {
+
+				clearScreen()
+
+				fmt.Println("================ 🔎 The Pathfinder 🔍 ================")
+
+				choice, noPath := PathFinder.UserChoice(board)
+
+				if !noPath {
+
+					fmt.Printf("Ooops!🫣 Sorry %s, there's no light at the end of your tunnel😞😞😞\n", UserName)
+					fmt.Println("Just go for deliverance abeg.😂 I would refer you to MFM!🤣")
+
+					time.Sleep(5 * time.Second)
+
+					break
+				}
+
+				if choice {
+					continue
+				} else {
+					break
+				}
 			}
-		}
 
-		replay := ""
+			replay := ""
 
-		for replay != "n" {
+			for replay != "n" {
 
-			message := fmt.Sprintf("Do you want to replay, %s?🤔 (y/n): \n", UserName)
+				message := fmt.Sprintf("Do you want to replay, %s?🤔 (y/n): \n", UserName)
 
-			replay = strings.ToLower(PathFinder.Input(message))
+				replay = strings.ToLower(PathFinder.Input(message))
 
-			if replay == "y" {
-				break
+				if replay == "y" {
+					break
 
-			} else if replay == "n" {
-				return
+				} else if replay == "n" {
+					return
 
-			} else {
-				fmt.Println("Invalid Input!🤦 Type 'y' for yes or 'n' for no. Simple as ABC! 😂")
+				} else {
+					fmt.Println("Invalid Input!🤦 Type 'y' for yes or 'n' for no. Simple as ABC! 😂")
+				}
 			}
 		}
 	}
-}
 }

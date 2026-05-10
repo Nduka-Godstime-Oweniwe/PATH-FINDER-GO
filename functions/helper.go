@@ -37,7 +37,7 @@ func GetUserName() string {
 			continue
 		}
 		fmt.Printf("Hello!👋 %s, The Beast!🫡💯\n", username)
-		time.Sleep(2 * time.Second)
+		time.Sleep(3 * time.Second)
 		break
 	}
 	return username
