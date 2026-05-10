@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 )
 
 func main() {
@@ -37,6 +38,8 @@ func GetUserName() string {
 			fmt.Println("Error: Username is too long. Hint: max. length is 15")
 			continue
 		}
+		time.Sleep(1 * time.Second)
+		clearScreen()
 		fmt.Printf("Hello! %s The Beast!\n", username)
 		break
 	}
@@ -231,13 +234,13 @@ func Everything() []string {
 	return slice
 }
 
-func UserInput() []string {
+func UserInput() ([]string, bool) {
 	userchoice := GetUserChoice()
 	if userchoice == "1" {
-		return Everything()
+		return Everything(), true
 	} else if userchoice == "2" {
-		return RowByRow()
+		return RowByRow(), true
 	} else {
-		return []string{}
+		return []string{}, false
 	}
 }

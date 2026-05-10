@@ -44,7 +44,10 @@ func main() {
 	for {
 		for {
 			clearScreen()
-			userSlice := PathFinder.UserInput()
+			userSlice, exit := PathFinder.UserInput()
+			if !exit {
+				return
+			}
 			board = PathFinder.CreateBoard(userSlice)
 			if !PathFinder.CheckEntireBoard(board) {
 				fmt.Println("Your board must contain an E and an S!")
