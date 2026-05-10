@@ -7,44 +7,9 @@ import (
 	"strings"
 )
 
-func main() {
-
-	fmt.Println(UserInput())
-}
-
 // 😉🤔🫣🙄💯👇👋👆🫡😎🤦💰💵
 // 😂🤣😄
-
-func GetUserName() string {
-	fmt.Println("Welcome to the Pathfinder")
-	var username string
-
-	reader := bufio.NewReader(os.Stdin)
-
-	for {
-		// Collect & validate username
-		fmt.Print("Please input your username to begin your quest to riches💰💵\nUsername: ")
-
-		name, _ := reader.ReadString('\n')
-		username = strings.TrimSpace(name)
-
-		if username == "" {
-			fmt.Println("As how na?🤦 You can't be nameless now")
-			continue
-		}
-		if strings.Contains(username, " ") {
-			fmt.Println("My G,😎 abeg don't use space. Hint: Use '_' instead")
-			continue
-		}
-		if len(username) > 15 {
-			fmt.Println("Nawa for you o,😉 Your name is longer than Methuselah age 🤣. Hint: max. length is 15")
-			continue
-		}
-		fmt.Printf("Hello!👋 %s The Beast!🫡💯\n", username)
-		break
-	}
-	return username
-}
+// 🔍🔎▶⏯
 
 func GetUserChoice() string {
 	reader := bufio.NewReader(os.Stdin)
@@ -53,7 +18,7 @@ func GetUserChoice() string {
 	fmt.Println("1: Input entire board rows at once")
 	fmt.Println("2: Input board row sequentially")
 	fmt.Println("3: Exit")
-	
+
 	option := ""
 	for {
 		fmt.Print("Choose option: ")
@@ -61,7 +26,7 @@ func GetUserChoice() string {
 		option = strings.TrimSpace(option)
 		option = strings.ToUpper(option)
 		if option != "1" && option != "2" && option != "3" {
-			fmt.Println("Invalid Option!🙄")
+			fmt.Println("Invalid Option!🙄 It is well with you oo.. ordinary 1 2 3🤣😄")
 			continue
 		}
 		break
@@ -111,21 +76,21 @@ func EachRow(num int) (string, bool, bool) {
 	rows := ""
 
 	for {
-		fmt.Printf("Enter Row %v or type \"done\" to stop: ", num)
+		fmt.Printf("Enter Row %v or type \"done\" to stop 👉: ", num)
 
 		rows, _ = reader.ReadString('\n')
 		rows = strings.TrimSpace(rows)
 		rows = strings.ToUpper(rows)
 
 		if rows == "" {
-			fmt.Println("Haba now! Row Cannot Be Empty")
+			fmt.Println("Haba now!🙄 Row Cannot Be Empty")
 			continue
 
 		} else if strings.ToUpper(rows) == "DONE" {
 			break
 
 		} else if !CheckCharacters(rows) {
-			fmt.Println("Oversabi wan finish you!😂 Only 1 \"S\", 1 \"E\" and as many \"X\" and \".\" are allowed ")
+			fmt.Println("Oversabi wan finish you!😂 Only 1 \"S\", 1 \"E\" and as many \"X\" and \".\" are allowed")
 			continue
 		}
 
@@ -186,7 +151,7 @@ func Everything() []string {
 		answer = strings.TrimSpace(answer)
 		answer = strings.ToUpper(answer)
 		if answer == "" {
-			fmt.Println("As how na? you cannot input an empty Input")
+			fmt.Println("As how na?🙄 Na magic you want make I perform!🤣😄 You cannot have an empty input")
 			continue
 		}
 		slice = strings.Fields(answer)
@@ -196,25 +161,25 @@ func Everything() []string {
 
 		for i := 0; i < len(slice); i++ {
 			if S >= 1 && CheckS(slice[i]) {
-				fmt.Println("Pls, ensure you have only 1 S in the entire board")
+				fmt.Println("Boss abeg,🙏 ensure you have only 1 S in the entire board")
 				check = false
 				break
 			}
 
 			if E >= 1 && CheckE(slice[i]) {
-				fmt.Println("Pls, ensure you have only 1 E in the entire board")
+				fmt.Println("Boss abeg,🙏 ensure you have only 1 E in the entire board")
 				check = false
 				break
 			}
 
 			if !CheckCharacters(slice[i]) {
-				fmt.Println("Only 1 \"S\", 1 \"E\" and as many \"X\" and \".\" are allowed per row")
+				fmt.Println("The ToloTolo 🤣... Only 1 \"S\", 1 \"E\" and as many \"X\" and \".\" are allowed per row")
 				check = false
 				break
 
 			}
 			if len(slice[0]) != len(slice[i]) {
-				fmt.Println("Pls Ensure Each Row are of equal length")
+				fmt.Println("All fingers are not equal don't apply here boss!😉 Ensure all rows are of equal length")
 				check = false
 				break
 			}

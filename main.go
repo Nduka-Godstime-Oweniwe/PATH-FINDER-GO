@@ -22,32 +22,21 @@ func clearScreen() {
 		cmd.Run()
 	}
 }
+
 func main() {
-	// slice := []string{
-	// 	"..S..X",
-	// 	"X...X.",
-	// 	"E..X..",
-	// }
-	// slice := []string{
-	// 	"......",
-	// 	"SXEXX.",
-	// 	".X....",
-	// // }
-	// slice := []string{
-	// 	"S..............................................",
-	// 	"...............................................",
-	// 	"...............................................",
-	// 	"...............................................",
-	// 	"..............................................E",
-	// }
+	
 	board := [][]string{}
+	username := PathFinder.GetUserName()
 	for {
+		
 		for {
 			clearScreen()
+			fmt.Println("================ 🔎 The Pathfinder 🔍 ================")
+			username := PathFinder.GetUserName()
 			userSlice := PathFinder.UserInput()
 			board = PathFinder.CreateBoard(userSlice)
 			if !PathFinder.CheckEntireBoard(board) {
-				fmt.Println("Your board must contain an E and an S!")
+				fmt.Printf("%s,Your board must contain an E and an S now!🙄\n", username)
 				time.Sleep(2 * time.Second)
 			} else {
 				break
@@ -56,10 +45,11 @@ func main() {
 		// row, col := PathFinder.FindS(board)
 		for {
 			clearScreen()
+			fmt.Println("================ 🔎 The Pathfinder 🔍 ================")
 			choice, noPath := PathFinder.UserChoice(board)
 			if !noPath {
-				fmt.Println("Ooops! Sorry There's no light at the end of your tunnel😞😞😞")
-				fmt.Println("Just go for deliverance abeg. I would refer you to MFM!")
+				fmt.Printf("Ooops!🫣 Sorry %s, there's no light at the end of your tunnel😞😞😞\n", username)
+				fmt.Println("Just go for deliverance abeg.😂 I would refer you to MFM!🤣")
 				time.Sleep(5 * time.Second)
 				break
 			}
@@ -71,14 +61,15 @@ func main() {
 		}
 		replay := ""
 		for replay != "n" {
-			replay = strings.ToLower(PathFinder.Input("Do you want to replay? (y/n): "))
+			message := fmt.Sprintf("Do you want to replay, %s?🤔 (y/n): \n", username)
+			replay = strings.ToLower(PathFinder.Input(message))
 			if strings.ToLower(replay) == "y" {
 				break
 			} else if strings.ToLower(replay) == "n" {
 				return
 			} else {
-				println("Invalid Input. Type 'y' for yes or 'n' for no.")
-			}
+				println("Invalid Input!🤦 Type 'y' for yes or 'n' for no. Simple as ABC! 😂")
+			} 
 
 		}
 	}

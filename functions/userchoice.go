@@ -71,6 +71,6 @@ func UserChoice(board [][]string) (bool, bool) {
 		return false, true
 	}
 
-	Input("Type Anything to continue: ")
+	Input("Type Anything to continue 👉: ")
 	return true, true
 }
