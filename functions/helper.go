@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 )
 
 func GetUserName() string {
@@ -36,6 +37,7 @@ func GetUserName() string {
 			continue
 		}
 		fmt.Printf("Hello!👋 %s, The Beast!🫡💯\n", username)
+		time.Sleep(2 * time.Second)
 		break
 	}
 	return username
