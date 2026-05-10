@@ -24,16 +24,19 @@ func clearScreen() {
 }
 
 func main() {
-	
+
 	board := [][]string{}
 	username := PathFinder.GetUserName()
 	for {
-		
+
 		for {
 			clearScreen()
 			fmt.Println("================ 🔎 The Pathfinder 🔍 ================")
 			username := PathFinder.GetUserName()
-			userSlice := PathFinder.UserInput()
+			userSlice, exit := PathFinder.UserInput()
+			if !exit {
+				return
+			}
 			board = PathFinder.CreateBoard(userSlice)
 			if !PathFinder.CheckEntireBoard(board) {
 				fmt.Printf("%s,Your board must contain an E and an S now!🙄\n", username)
@@ -69,7 +72,7 @@ func main() {
 				return
 			} else {
 				println("Invalid Input!🤦 Type 'y' for yes or 'n' for no. Simple as ABC! 😂")
-			} 
+			}
 
 		}
 	}

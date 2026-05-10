@@ -200,13 +200,13 @@ func Everything() []string {
 	return slice
 }
 
-func UserInput() []string {
+func UserInput() ([]string, bool) {
 	userchoice := GetUserChoice()
 	if userchoice == "1" {
-		return Everything()
+		return Everything(), true
 	} else if userchoice == "2" {
-		return RowByRow()
+		return RowByRow(), true
 	} else {
-		return []string{}
+		return []string{}, false
 	}
 }
