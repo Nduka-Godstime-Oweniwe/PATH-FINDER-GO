@@ -57,7 +57,6 @@ func main() {
 					time.Sleep(1 * time.Second)
 
 				} else {
-					time.Sleep(10 * time.Second)
 					break
 				}
 			}
@@ -75,7 +74,7 @@ func main() {
 					fmt.Printf("Ooops!🫣 Sorry %s, there's no light at the end of your tunnel😞😞😞\n", UserName)
 					fmt.Println("Just go for deliverance abeg.😂 I would refer you to MFM!🤣")
 
-					time.Sleep(1 * time.Second)
+					time.Sleep(5 * time.Second)
 
 					break
 				}
